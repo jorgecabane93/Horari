@@ -22,38 +22,150 @@ class Center {
     }
 
     /**
-     * @return array get_all(void) trae un arreglo de todos los elementos de la bbdd
+     * @return boolean inserta un nuevo centro
+     */
+    public function insert() {
+        if ($this->company_id !== "null" && $this->name !== "null") {
+            /* incluye la conexion a la base de datos */
+            require_once dirname(__FILE__) . '/config/config.php';
+
+            /* query de ejecucion */
+            $query = "INSERT INTO $this->tableName VALUES (null, $this->company_id, '$this->name', '$this->acronym', NOW())";
+
+            /* ejecucion */
+            $BD->query($query);
+
+            /* verificacion de resultaado */
+            if ($BD->affected_rows >= 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        $BD->close();
+    }
+
+    /**
+     * @return boolean actualiza los datos del centro
+     */
+    public function update() {
+        if ($this->id !== "null") {
+            /* incluye la conexion a la base de datos */
+            require_once dirname(__FILE__) . '/config/config.php';
+
+            /* query de ejecucion */
+            $query = "UPDATE $this->tableName SET company_id = $this->company_id, name = '$this->name', acronym = '$this->acronym', lastmodified = NOW() WHERE id=$this->id";
+
+            /* ejecucion */
+            $BD->query($query);
+
+            /* verificacion de resultaado */
+            if ($BD->affected_rows >= 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        $BD->close();
+    }
+
+    /**
+     * @return boolean borra un centro de la tabla
+     */
+    public function delete() {
+        if ($this->id !== "null") {
+            /* incluye la conexion a la base de datos */
+            require_once dirname(__FILE__) . '/config/config.php';
+
+            /* query de ejecucion */
+            $query = "DELETE FROM $this->tableName WHERE id = $this->id";
+
+            /* ejecucion */
+            $BD->query($query);
+
+            /* verificacion de resultaado */
+            if ($BD->affected_rows >= 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        $BD->close();
+    }
+
+    /**
+     * @return array trae un arreglo de todos los elementos de la bbdd
      */
     public function get_all() {
         /* incluye la conexion a la base de datos */
         require_once dirname(__FILE__) . '/config/config.php';
+
         /* query de ejecucion */
         $query = "SELECT * FROM $this->tableName";
 
+        /* ejecucion */
         $resultado = $BD->query($query);
-        if ($resultado->num_rows >= 1) {
-            /* obtener el array de objetos */
 
+        /* verificacion de resultaado */
+        if ($BD->affected_rows >= 1) {
+
+            /* obtener el array de objetos */
             while ($obj = $resultado->fetch_object()) {
                 $res[] = $obj;
             }
 
-            /* liberar el conjunto de resultados */
-            $resultado->close();
             /* devolver el arreglo con los resultados */
             return $res;
         } else {
-            //return $query;
+            return false;
+        }
+        /* liberar el conjunto de resultados */
+        $BD->close();
+    }
+
+    /**
+     * @return array Obtiene los datos desde la bbdd del centro instanciado (debe tener id) 
+     * y devuelve un objeto para utilizar en cualquier situación
+     */
+    public function get_by_id() {
+        if ($this->id !== "null") {
+            /* incluye la conexion a la base de datos */
+            require_once dirname(__FILE__) . '/config/config.php';
+
+            /* query de ejecucion */
+            $query = "SELECT * FROM $this->tableName WHERE id = $this->id";
+
+            /* ejecicion */
+            $resultado = $BD->query($query);
+
+            if ($BD->affected_rows >= 1) {
+
+                /* obtener el array de objetos */
+                while ($obj = $resultado->fetch_object()) {
+                    $res[] = $obj;
+                }
+
+                /* devolver el arreglo con los resultados */
+                return $res;
+            } else {
+                return false;
+            }
+            /* liberar el conjunto de resultados */
+            $BD->close();
+        } else {
             return false;
         }
     }
 
 }
 
-//$center = new Center();
-//
-//foreach ($center->get_all() as $obj) {
-//    if (is_object($obj)) {
-//        echo "$obj->name <br>";
-//    }
-//}
+//$center = new Center(3, 1, null, null);
+//print_r($center);
+//echo '<br>';
+//var_dump($center->get_all());
