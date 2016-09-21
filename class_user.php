@@ -11,7 +11,7 @@ class User {
      */
     protected $tablename = 'user';
  
-    public $id,$email,$phone;
+    protected $id,$email,$phone;
 
     public function __construct($id = null, $name = null, $secondname = null, $lastname = null, $secondlastname = null, $birthdate = null, $email = null, $phone = null, $extra = null, $secondextra = null) {
         $this->id = $id;
@@ -66,9 +66,27 @@ class User {
     	 * @var string query de ejecución
     	 */
     	if($this->name !== null && $this->lastname !== null && $this->email !== null){
-    		$query = "INSERT INTO $this->tablename VALUES ('null', '$this->name', '$this->secondname','$this->lastname','$this->secondlastname',$this->birthdate,'$this->email', $this->phone,'$this->extra','$this->secondextra',NOW(),NOW())";
+    		$query = "INSERT INTO $this->tablename VALUES ('null', '$this->name', '$this->secondname','$this->lastname','$this->secondlastname','$this->birthdate','$this->email', '$this->phone','$this->extra','$this->secondextra',NOW(),NOW())";
     		$result = $BD->query($query);
-    		echo $query;
+    		return $result;
     	}
+    }
+    
+    public function delete(){
+    	/**
+    	 * @return boolean borra en la base de datos
+    	 */
+    	require_once dirname(__FILE__) . '/config/config.php';
+    	/**
+    	 * @var string query de ejecución
+    	 */
+    	if($this->id !== null){
+    		$query = "DELETE FROM $this->tablename WHERE id = $this->id";
+    		$result = $BD->query($query);
+    		return $result;
+    	}
+    }
+    public function get_by_id(){
+    	
     }
 }
