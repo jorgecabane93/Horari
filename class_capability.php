@@ -1,26 +1,26 @@
 <?php
-class center_resource {
+class capability {
 	/**
 	 *
 	 * @var string nombre de la tabla
 	 */
-	public $tableName = 'center_resource';
-	public $headers = ["center_id", "resource_id", "lastmodified"];
+	public $tableName = 'capability';
+	public $headers = ["id", "capability", "lastmodified"];
 	
-	public function __construct($centerid = 'null', $resourceid = 'null') {
-		$this->centerid = $centerid;
-		$this->resourceid = $resourceid;
+	public function __construct($id = 'null', $capability = 'null') {
+		$this->id = $id;
+		$this->capability = $capability;
 	}
 	public function update() {
 		/**
-		 * @return boolean updates center_resource
+		 * @return boolean updates capability
 		 */
 		//incluye la conexion a la base de datos
 		require_once dirname(__FILE__) . '/../config/config.php';
 		/**
 		 * @var string query de ejecución
 		 */
-		$query = "UPDATE  $this->tableName  SET center_id = ' $this->centerid ', resource_id = ' $this->resourceid ', lastmodified = NOW() WHERE center_id = $this->centerid and resource_id = $this->resourceid";
+		$query = "UPDATE  $this->tableName  SET capability = ' $this->capability ', lastmodified = NOW() WHERE id = $this->id";
 		/**
 		 * @var mysql resultado mysql
 		 */
@@ -41,10 +41,9 @@ class center_resource {
 		/**
 		 * @var string query de ejecución
 		 */
-		if ($this->centerid !== null && $this->resourceid !== null) {
-			$query = "INSERT INTO  . $this->tableName . VALUES (' . $this->centerid . ', ' . $this->resourceid . ', NOW())";
+		if ($this->id !== null) {
+			$query = "INSERT INTO  . $this->tableName .  VALUES ('null', ' . $this->capability . ', NOW())";
 			
-
 			if ($res = $BD->query($query)) {
 				return true;
 			} else {
@@ -64,8 +63,8 @@ class center_resource {
 		/**
 		 * @var string query de ejecución
 		 */
-		if ($this->centerid !== null && $this->resourceid !== null) {
-			$query = "DELETE FROM  $this->tableName  WHERE  $this->headers[0] = $this->centerid and $this->headers[1] = $this->resourceid";
+		if ($this->id !== null) {
+			$query = "DELETE FROM  $this->tableName  WHERE  $this->headers[0] = $this->id";
 
 			if ($res = $BD->query($query)) {
 				return true;
@@ -81,7 +80,7 @@ class center_resource {
 	public function getAll() {
 		/**
 		 *
-		 * @return array|false devuelve todas las center resource o falso si no hay
+		 * @return array|false devuelve todas las capabilities o falso si no hay
 		 */
 		//incluye la conexion a la base de datos
 		require_once dirname(__FILE__) . '/../config/config.php';
