@@ -2,13 +2,8 @@
 
 include 'class_bd.php';
 
-//$connection = new BD('localhost', 'root', '', 'horari');
-$connection = new BD();
-$connection->connect();
-
 $query = 'SELECT * FROM  user';
-$result = mysqli_query($connection->myconn, $query);
-
+$result = $BD-> query($query);
 
 if($numrows = mysqli_num_rows($result)) {
         echo $numrows;
@@ -21,5 +16,6 @@ if($numrows = mysqli_num_rows($result)) {
         echo $secondname. " ";
         echo $lastname. " ";
         echo $secondlastname. " ";
-    }}
+    }
+}
 ?>

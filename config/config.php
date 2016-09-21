@@ -6,5 +6,3 @@
  
 require_once '../class_bd.php';
 
-$connection = new BD();
-$connection->connect();
