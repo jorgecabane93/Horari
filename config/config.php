@@ -4,5 +4,5 @@
  * Archivo de conexión de la clase BD.
  */
  
-require_once '../class_bd.php';
+require_once dirname(__FILE__) .'/connection.php';
 
