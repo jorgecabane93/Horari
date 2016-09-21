@@ -53,7 +53,6 @@ class BD  {
 	 */
 	public function close() {
 		mysqli_close($myconn);
-		echo 'Connection closed!';
 	}
 
 }
