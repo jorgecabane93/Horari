@@ -1,4 +1,5 @@
 <?php
+require_once dirname(dirname(__FILE__)) . '/config/config.php';
 $page_title = "CRUD Admin";
 ?>
 <!DOCTYPE html>
@@ -8,15 +9,22 @@ $page_title = "CRUD Admin";
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- JAVASCRIPT--> 
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <!-- Compiled and minified  MATERIALIZE JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-
-
+        <?php
+        foreach ($library['js']as $link) {
+            if ($link !== '') {
+                echo "<script type='text/javascript' src='$link'></script>\n";
+            }
+        }
+        ?>
         <!-- CSS -->
         <!-- Compiled and minified materialize CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <?php
+        foreach ($library['css']as $link) {
+            if ($link !== '') {
+                echo "<link rel='stylesheet' href='$link'></script>\n";
+            }
+        }
+        ?>
         <style>
             .block-btn{
                 width: 100%;
