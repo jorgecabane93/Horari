@@ -33,7 +33,7 @@ class User {
     	//incluye la conexion a la base de datos
     	require_once dirname(__FILE__) . '/config/config.php';
     	/**
-    	 * @var string query de ejecución
+    	 * @var string query de ejecuciï¿½n
     	 */
     	$query = "UPDATE $this->tablename SET 
     			  name = '$this->name', 
@@ -49,8 +49,8 @@ class User {
     	/**
     	* @var mysql resultado mysql
     	*/
-    	$res = mysql_query($query) or die(mysql_error() . ' -- ' . $query);
-    	if ($res) {
+    	$result = $BD->query($query);
+    	if ($result) {
     		return true;
     	} else {
     		return false;
@@ -63,10 +63,23 @@ class User {
     	 */
     	require_once dirname(__FILE__) . '/config/config.php';
     	/**
-    	 * @var string query de ejecución
+    	 * @var string query de ejecuciï¿½n
     	 */
     	if($this->name !== null && $this->lastname !== null && $this->email !== null){
-    		$query = "INSERT INTO $this->tablename VALUES ('null', '$this->name', '$this->secondname','$this->lastname','$this->secondlastname','$this->birthdate','$this->email', '$this->phone','$this->extra','$this->secondextra',NOW(),NOW())";
+    		$query = "INSERT INTO $this->tablename 
+    				  VALUES ('null',
+    						  '$this->name',
+    						  '$this->secondname',
+    						  '$this->lastname',
+    						  '$this->secondlastname',
+    						  '$this->birthdate',
+    						  '$this->email',
+    						  '$this->phone',
+    						  '$this->extra',
+    						  '$this->secondextra',
+    						  NOW(),
+    						  NOW()
+    					)";
     		$result = $BD->query($query);
     		return $result;
     	}
@@ -78,7 +91,7 @@ class User {
     	 */
     	require_once dirname(__FILE__) . '/config/config.php';
     	/**
-    	 * @var string query de ejecución
+    	 * @var string query de ejecuciï¿½n
     	 */
     	if($this->id !== null){
     		$query = "DELETE FROM $this->tablename WHERE id = $this->id";
@@ -86,7 +99,44 @@ class User {
     		return $result;
     	}
     }
+    
     public function get_by_id(){
+    	/**
+    	 * @return boolean borra en la base de datos
+    	 */
+    	require_once dirname(__FILE__) . '/config/config.php';
+    	/**
+    	 * @var string query de ejecuciï¿½n
+    	 */
+    	$query = "SELECT * 
+    			  FROM user 
+    			  WHERE id = $this->id";
+    	/**
+    	 * @var mysql resultado mysql
+    	 */
+    	$result = $BD->query($query);
     	
+    	
+    	
+    	return $result;
     }
+    
+    public function get_all(){
+    	/**
+    	 * @return boolean borra en la base de datos
+    	 */
+    	require_once dirname(__FILE__) . '/config/config.php';
+    	/**
+    	 * @var string query de ejecuciï¿½n
+    	 */
+    	$query = "SELECT * FROM user";
+    	/**
+    	 * @var mysql resultado mysql
+    	 */
+    	$result = $BD->query($query);
+    }
+    
 }
+$user = new User(8);
+$result = $user->get_by_id();
+print_r($result);
