@@ -23,9 +23,9 @@ class Capability {
 	 * @return boolean inserta una nueva capability
 	 */
 	public function insert() {
-		if ($this->company_id !== "null" && $this->name !== "null") {
+		if ($this->capability !== "null") {
 			/* incluye la conexion a la base de datos */
-			require_once dirname(__FILE__) . '/../config/config.php';
+            require_once dirname(dirname(__FILE__)) . '/config/config.php';
 
 			/* query de ejecucion */
 			$query = "INSERT INTO $this->tablename VALUES (NULL, ' $this->capability ', NOW())";
@@ -53,7 +53,7 @@ class Capability {
 	public function update() {
 		if ($this->id !== "null") {
 			/* incluye la conexion a la base de datos */
-			require_once dirname(__FILE__) . '/../config/config.php';
+            require_once dirname(dirname(__FILE__)) . '/config/config.php';
 
 			/* query de ejecucion */
 			$query = "UPDATE  $this->tablename  SET capability = ' $this->capability ', lastmodified = NOW() WHERE id = $this->id";
@@ -81,7 +81,7 @@ class Capability {
 	public function delete() {
         if ($this->id !== "null") {
             /* incluye la conexion a la base de datos */
-			require_once dirname(__FILE__) . '/../config/config.php';
+            require_once dirname(dirname(__FILE__)) . '/config/config.php';
 	
 			/* query de ejecucion */
 			$query = "DELETE FROM  $this->tablename  WHERE  id = $this->id";
@@ -104,7 +104,7 @@ class Capability {
 	 */
 	public function getAll() {
         /* incluye la conexion a la base de datos */
-        require_once dirname(__FILE__) . '/config/config.php';
+        require_once dirname(dirname(__FILE__)) . '/config/config.php';
 
         /* query de ejecucion */
 		$query = "SELECT * FROM  $this->tablename";
@@ -136,7 +136,7 @@ class Capability {
     public function get_by_id() {
     	if ($this->id !== "null") {
     		/* incluye la conexion a la base de datos */
-    		require_once dirname(__FILE__) . '/config/config.php';
+            require_once dirname(dirname(__FILE__)) . '/config/config.php';
     
     		/* query de ejecucion */
     		$query = "SELECT * FROM $this->tablename WHERE id = $this->id";
