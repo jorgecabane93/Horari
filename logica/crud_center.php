@@ -16,7 +16,7 @@ if ($centers) {
         echo "<td>$center->name</td>";
         echo "<td>$center->acronym</td>";
         echo "<td>$center->lastmodified</td>";
-        echo "<td><a class='btn red'><i class='large material-icons'>delete</i></a></td>";
+        echo "<td><a class='btn red'><i class='material-icons'>delete</i></a></td>";
         echo "</tr>";
     }
 } else {
