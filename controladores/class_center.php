@@ -27,7 +27,7 @@ class Center {
     public function insert() {
         if ($this->company_id !== "null" && $this->name !== "null") {
             /* incluye la conexion a la base de datos */
-            require_once dirname(__FILE__) . '/config/config.php';
+            require_once dirname(dirname(__FILE__)) . '/config/config.php';
 
             /* query de ejecucion */
             $query = "INSERT INTO $this->tableName VALUES (null, $this->company_id, '$this->name', '$this->acronym', NOW())";
@@ -41,10 +41,10 @@ class Center {
             } else {
                 return false;
             }
+            $BD->close();
         } else {
             return false;
         }
-        $BD->close();
     }
 
     /**
@@ -53,7 +53,7 @@ class Center {
     public function update() {
         if ($this->id !== "null") {
             /* incluye la conexion a la base de datos */
-            require_once dirname(__FILE__) . '/config/config.php';
+            require_once dirname(dirname(__FILE__)) . '/config/config.php';
 
             /* query de ejecucion */
             $query = "UPDATE $this->tableName SET company_id = $this->company_id, name = '$this->name', acronym = '$this->acronym', lastmodified = NOW() WHERE id=$this->id";
@@ -67,10 +67,10 @@ class Center {
             } else {
                 return false;
             }
+            $BD->close();
         } else {
             return false;
         }
-        $BD->close();
     }
 
     /**
@@ -79,7 +79,7 @@ class Center {
     public function delete() {
         if ($this->id !== "null") {
             /* incluye la conexion a la base de datos */
-            require_once dirname(__FILE__) . '/config/config.php';
+            require_once dirname(dirname(__FILE__)) . '/config/config.php';
 
             /* query de ejecucion */
             $query = "DELETE FROM $this->tableName WHERE id = $this->id";
@@ -93,10 +93,10 @@ class Center {
             } else {
                 return false;
             }
+            $BD->close();
         } else {
             return false;
         }
-        $BD->close();
     }
 
     /**
@@ -104,7 +104,7 @@ class Center {
      */
     public function get_all() {
         /* incluye la conexion a la base de datos */
-        require_once dirname(__FILE__) . '/config/config.php';
+        require_once dirname(dirname(__FILE__)) . '/config/config.php';
 
         /* query de ejecucion */
         $query = "SELECT * FROM $this->tableName";
@@ -136,7 +136,7 @@ class Center {
     public function get_by_id() {
         if ($this->id !== "null") {
             /* incluye la conexion a la base de datos */
-            require_once dirname(__FILE__) . '/config/config.php';
+            require_once dirname(dirname(__FILE__)) . '/config/config.php';
 
             /* query de ejecucion */
             $query = "SELECT * FROM $this->tableName WHERE id = $this->id";
