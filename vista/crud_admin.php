@@ -17,6 +17,11 @@ $page_title = "CRUD Admin";
         <!-- Compiled and minified materialize CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <style>
+            .block-btn{
+                width: 100%;
+            }
+        </style>
     </head>
     <body>
         <!-- -------------------NAV BAR---------------------------------- -->
@@ -41,18 +46,29 @@ $page_title = "CRUD Admin";
             <div class="col m2">
                 <ul class="collapsible" data-collapsible="accordion">
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">filter_drama</i>Categoria I</div>
+                        <div class="collapsible-header"><i class="material-icons">group_work</i>Empresas</div>
                         <div class="collapsible-body">
-                            <a class="btn" id="center">Center</a>
+                            <a class="btn blue waves-effect waves-light block-btn" id="company">Company</a>
+                            <a class="btn blue waves-effect waves-light block-btn" id="center">Center</a>
                         </div>
                     </li>
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">place</i>Categoria II</div>
-                        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                        <div class="collapsible-header"><i class="material-icons">contacts</i>Usuarios</div>
+                        <div class="collapsible-body">
+                            <a class="btn waves-effect waves-light block-btn" id="feedback">Feedback</a>
+                        </div>
                     </li>
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">whatshot</i>Categoria III</div>
-                        <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                        <div class="collapsible-header"><i class="material-icons">picture_in_picture</i>Eventos</div>
+                        <div class="collapsible-body">
+                            <a class="btn green darken-4 waves-effect waves-light block-btn" id="resource">Resource</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">settings</i>Settings</div>
+                        <div class="collapsible-body">
+                            <a class="btn orange darken-4 waves-effect waves-light block-btn" id="level">Level</a>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -69,9 +85,10 @@ $page_title = "CRUD Admin";
                 accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
             });
 
-            $('#center').click(function () {
+            $('#center, #company').click(function () {
+                url = "../logica/crud_" + $(this).attr('id') + ".php";
                 $('.progress').children('div').toggleClass('determinate').toggleClass('indeterminate');
-                $('#content').load("../logica/crud_center.php", function () {
+                $('#content').load(url, function () {
                     $('.progress').children('div').toggleClass('determinate').toggleClass('indeterminate');
                 });
             });
