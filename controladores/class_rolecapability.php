@@ -1,41 +1,38 @@
 <?php
 
 /**
- * Archivo de definicion de la clase company.
+ * Archivo de definicion de la clase rolecapability.
  * Las clases se definen con Mayuscula para diferenciarlas de los metodos
  */
-class Company {
+class Roleca_pability {
 
-    /**
-     * @property int $id id de la company
-     * @property string $tableName nombre de la tabla en la base de datos 
-     */
-    protected $id, $tableName = "company";
-
-    public function __construct($id = "null", $name = "null", $dni = "null", $comercialbusiness = "null", $address = "null") {
-        //setea los atributos a null cuando la clase es instanciada
-        $this->id = $id;
-        $this->name = $name;
-        $this->dni = $dni;
-        $this->comercialbusiness = $comercialbusiness;
-        $this->address = $address;
-        //campos extra
-        //$this->extralocation = $extralocation;
-        //$this->extra = $extra;
-    }
-
-    /**
-     * @return boolean inserta un nuevo centro
-     */
-    public function insert() {
-        if ($this->dni !== "null" && $this->name !== "null" && $this->comercialbusiness !== "null") {
+	/**
+	 * @property int $id id del centro
+	 * @property int $company_id id de la compañia a la que pertenece
+	 * @property string $tableName nombre de la tabla en la base de datos
+	 */
+	
+	protected $id, $capabilityid, $roleid, $tableName = "role";
+	
+	
+	public function __construct($id = "null", $capabilityid = "null", $roleid = "null") {
+		$this->id = $id;
+		$this->capabilityid = $capabilityid;
+		$this->roleid = $roleid;
+	}
+	
+	/**
+	 * @return boolean inserta un nuevo role capability
+	 */
+	public function insert() {
+        if ($this->capabilityid !== "null" && $this->roleid !== "null") {
             /* incluye la conexion a la base de datos */
             require_once dirname(dirname(__FILE__)) . '/config/config.php';
 
             /* query de ejecucion */
-            $query = "INSERT INTO $this->tableName VALUES (null, $this->name, '$this->dni', '$this->comercialbusiness', '$this->address', null, null, NOW())";
-
-            /* ejecucion */
+			$query = "INSERT INTO  . $this->tableName .  VALUES ('null', ' . $this->capabilityid . ', ' . $this->roleid . ', NOW())";
+				
+         	/* ejecucion */
             $BD->query($query);
 
             /* verificacion de resultaado */
@@ -44,23 +41,23 @@ class Company {
             } else {
                 return false;
             }
+            $BD->close();
         } else {
             return false;
         }
-        $BD->close();
     }
-
+    
     /**
-     * @return boolean actualiza los datos del centro
+     * @return boolean actualiza los datos del role capability
      */
-    public function update() {
+	public function update() {
         if ($this->id !== "null") {
             /* incluye la conexion a la base de datos */
             require_once dirname(dirname(__FILE__)) . '/config/config.php';
 
             /* query de ejecucion */
-            $query = "UPDATE $this->tableName SET name = '$this->name', dni = '$this->dni', comercialbusiness = '$this->comercialbusiness', address = '$this->address', lastmodified = NOW() WHERE id=$this->id";
-
+			$query = "UPDATE  $this->tableName  SET capability_id = ' $this->capabilityid ', role_id = ' $this->roleid ', lastmodified = NOW() WHERE id = $this->id";
+        
             /* ejecucion */
             $BD->query($query);
 
@@ -70,39 +67,39 @@ class Company {
             } else {
                 return false;
             }
+            $BD->close();
         } else {
             return false;
         }
-        $BD->close();
     }
 
     /**
      * @return boolean borra un centro de la tabla
      */
-    public function delete() {
+	public function delete() {
         if ($this->id !== "null") {
             /* incluye la conexion a la base de datos */
             require_once dirname(dirname(__FILE__)) . '/config/config.php';
 
             /* query de ejecucion */
-            $query = "DELETE FROM $this->tableName WHERE id = $this->id";
+			$query = "DELETE FROM  $this->tableName  WHERE  id = $this->id";
 
-            /* ejecucion */
-            $BD->query($query);
-
-            /* verificacion de resultaado */
-            if ($BD->affected_rows >= 1) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-        $BD->close();
-    }
-
-    /**
+			/* ejecucion */
+			$BD->query($query);
+			
+			/* verificacion de resultaado */
+			if ($BD->affected_rows >= 1) {
+				return true;
+			} else {
+				return false;
+			}
+			$BD->close();
+		} else {
+			return false;
+		}
+	}
+			
+ /**
      * @return array trae un arreglo de todos los elementos de la bbdd
      */
     public function get_all() {
@@ -167,8 +164,3 @@ class Company {
     }
 
 }
-
-//$company = new Company(3, 1, null, null);
-//print_r($company);
-//echo '<br>';
-//var_dump($company->get_all());

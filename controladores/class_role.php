@@ -1,66 +1,61 @@
 <?php
 
 /**
- * Archivo de definicion de la clase company.
+ * Archivo de definicion de la clase role.
  * Las clases se definen con Mayuscula para diferenciarlas de los metodos
  */
-class Company {
+class Role {
 
-    /**
-     * @property int $id id de la company
-     * @property string $tableName nombre de la tabla en la base de datos 
-     */
-    protected $id, $tableName = "company";
+	/**
+	 * @property int $id id del centro
+	 * @property int $company_id id de la compañia a la que pertenece
+	 * @property string $tableName nombre de la tabla en la base de datos
+	 */
 
-    public function __construct($id = "null", $name = "null", $dni = "null", $comercialbusiness = "null", $address = "null") {
-        //setea los atributos a null cuando la clase es instanciada
-        $this->id = $id;
-        $this->name = $name;
-        $this->dni = $dni;
-        $this->comercialbusiness = $comercialbusiness;
-        $this->address = $address;
-        //campos extra
-        //$this->extralocation = $extralocation;
-        //$this->extra = $extra;
-    }
-
-    /**
-     * @return boolean inserta un nuevo centro
-     */
-    public function insert() {
-        if ($this->dni !== "null" && $this->name !== "null" && $this->comercialbusiness !== "null") {
-            /* incluye la conexion a la base de datos */
-            require_once dirname(dirname(__FILE__)) . '/config/config.php';
-
-            /* query de ejecucion */
-            $query = "INSERT INTO $this->tableName VALUES (null, $this->name, '$this->dni', '$this->comercialbusiness', '$this->address', null, null, NOW())";
-
-            /* ejecucion */
-            $BD->query($query);
-
-            /* verificacion de resultaado */
-            if ($BD->affected_rows >= 1) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-        $BD->close();
-    }
-
-    /**
-     * @return boolean actualiza los datos del centro
-     */
-    public function update() {
+	protected $id, $role, $tableName = "role";
+	
+	public function __construct($id = 'null', $role = 'null') {
+		$this->id = $id;
+		$this->role = $role;
+	}
+	
+	/**
+	 * @return boolean inserta un nuevo centro
+	 */
+	public function insert() {
         if ($this->id !== "null") {
             /* incluye la conexion a la base de datos */
             require_once dirname(dirname(__FILE__)) . '/config/config.php';
 
             /* query de ejecucion */
-            $query = "UPDATE $this->tableName SET name = '$this->name', dni = '$this->dni', comercialbusiness = '$this->comercialbusiness', address = '$this->address', lastmodified = NOW() WHERE id=$this->id";
+			$query = "INSERT INTO  . $this->tableName .  VALUES ('null', ' . $this->role . ', NOW())";
 
+			/* ejecucion */
+			$BD->query($query);
+			
+			/* verificacion de resultaado */
+			if ($BD->affected_rows >= 1) {
+				return true;
+			} else {
+				return false;
+			}
+			$BD->close();
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * @return boolean actualiza los datos del centro
+	 */
+	public function update() {
+     if ($this->id !== "null") {
+            /* incluye la conexion a la base de datos */
+            require_once dirname(dirname(__FILE__)) . '/config/config.php';
+
+            /* query de ejecucion */
+			$query = "UPDATE  $this->tableName  SET role = ' $this->role ', lastmodified = NOW() WHERE id = $this->id";
+     
             /* ejecucion */
             $BD->query($query);
 
@@ -70,10 +65,10 @@ class Company {
             } else {
                 return false;
             }
+            $BD->close();
         } else {
             return false;
         }
-        $BD->close();
     }
 
     /**
@@ -96,11 +91,12 @@ class Company {
             } else {
                 return false;
             }
+            $BD->close();
         } else {
             return false;
         }
-        $BD->close();
     }
+    
 
     /**
      * @return array trae un arreglo de todos los elementos de la bbdd
@@ -167,8 +163,3 @@ class Company {
     }
 
 }
-
-//$company = new Company(3, 1, null, null);
-//print_r($company);
-//echo '<br>';
-//var_dump($company->get_all());
