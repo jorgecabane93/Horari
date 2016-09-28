@@ -14,9 +14,10 @@ class User {
      */
     protected $tablename = "user", $id,$email,$phone;
 
-    public function __construct($id = null, $name = null, $secondname = null, $lastname = null, $secondlastname = null, $birthdate = null, $email = null, $phone = null, $extra = null, $secondextra = null) {
+    public function __construct($id = null, $dni = null, $name = null, $secondname = null, $lastname = null, $secondlastname = null, $birthdate = null, $email = null, $phone = null, $extra = null, $secondextra = null) {
     	/* setea los atributos a null cuando la clase es instanciada */
     	$this->id = $id;
+    	$this->dni = $dni;
         $this->name = $name;
         $this->secondname = $secondname;
         $this->lastname = $lastname;
@@ -32,17 +33,17 @@ class User {
      * @return boolean Inserta en la base de datos
      */
     public function insert(){
-    	if($this->name !== null && $this->lastname !== null && $this->email !== null){
-    
+    	if($this->name !== null && $this->lastname !== null && $this->email !== null && $this->dni !== null ){
     		/* incluye la conexion a la base de datos */
     		require_once dirname(__FILE__) . '/config/config.php';
-    		/**
-    		 * @var string query de ejecución
-    		 */
+    		require_once dirname(__FILE__) . '/class_password.php';
+    		
+    		if($this->get_by_dni() == false){
     		/* query de ejecucion */
     		$query = "INSERT INTO $this->tablename
     		VALUES ('null',
     		'$this->name',
+    		'$this->dni',
     		'$this->secondname',
     		'$this->lastname',
     		'$this->secondlastname',
@@ -56,11 +57,15 @@ class User {
     		)";
     		/* ejecucion */
     		$BD->query($query);
-    
+    		
+    		/* verificacion de resultaado */
     		if($BD->affected_rows >= 1){
+    			$password = new Password($this->id);
+    			$password->insert();
     			return true;
     		}else{
     			return false;
+    		}
     		}
     		/* liberar el conjunto de resultados */
     		$BD->close();
@@ -189,5 +194,41 @@ class User {
     	}
     	/* liberar el conjunto de resultados */
     	$BD->close();
-    }   
+    }  
+    
+    public function get_by_dni(){
+    	if($this->dni !== null){
+    		/* incluye la conexion a la base de datos */
+    		require_once dirname(__FILE__) . '/config/config.php';
+    		
+    		/* query de ejecucion */
+    		$query = "SELECT *
+    		FROM $this->tablename
+    		WHERE dni = $this->dni";
+    		
+    		/* ejecucion */
+    		$BD->query($query);
+    		
+    		/* verificacion de resultaado */
+    		if($BD->affected_rows >= 1){
+    			 
+    			/* obtener el array de objetos */
+    			while ($obj = $execution->fetch_object()) {
+    				$result[] = $obj;
+    			}
+    			 
+    			/* devolver el arreglo con los resultados */
+    			return $result;
+    		}else{
+    			return false;
+    		}
+    		/* liberar el conjunto de resultados */
+    		$BD->close();
+    		}else{
+    			return false;
+    		}
+    }
 }
+
+$user = new User(null,123456, 'pepe', 'p0', 'lopez', 'lopez', null, 'pepito.p0@tupapa.com', 123456789, null, null);
+$user->insert();
