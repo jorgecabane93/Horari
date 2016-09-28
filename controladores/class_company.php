@@ -12,13 +12,13 @@ class Company {
      */
     protected $id, $tableName = "company";
 
-    public function __construct($id = "null", $name = "null", $dni = "null", $comercialbusiness = "null", $adress = "null") {
+    public function __construct($id = "null", $name = "null", $dni = "null", $comercialbusiness = "null", $address = "null") {
         //setea los atributos a null cuando la clase es instanciada
         $this->id = $id;
         $this->name = $name;
         $this->dni = $dni;
         $this->comercialbusiness = $comercialbusiness;
-        $this->adress = $adress;
+        $this->address = $address;
         //campos extra
         //$this->extralocation = $extralocation;
         //$this->extra = $extra;
@@ -30,10 +30,10 @@ class Company {
     public function insert() {
         if ($this->dni !== "null" && $this->name !== "null" && $this->comercialbusiness !== "null") {
             /* incluye la conexion a la base de datos */
-            require_once dirname(__FILE__) . '/config/config.php';
+            require_once dirname(dirname(__FILE__)) . '/config/config.php';
 
             /* query de ejecucion */
-            $query = "INSERT INTO $this->tableName VALUES (null, $this->name, '$this->dni', '$this->comercialbusiness', '$this->adress', null, null, NOW())";
+            $query = "INSERT INTO $this->tableName VALUES (null, $this->name, '$this->dni', '$this->comercialbusiness', '$this->address', null, null, NOW())";
 
             /* ejecucion */
             $BD->query($query);
@@ -56,10 +56,10 @@ class Company {
     public function update() {
         if ($this->id !== "null") {
             /* incluye la conexion a la base de datos */
-            require_once dirname(__FILE__) . '/config/config.php';
+            require_once dirname(dirname(__FILE__)) . '/config/config.php';
 
             /* query de ejecucion */
-            $query = "UPDATE $this->tableName SET name = '$this->name', dni = '$this->dni', comercialbusiness = '$this->comercialbusiness', adress = '$this->adress', lastmodified = NOW() WHERE id=$this->id";
+            $query = "UPDATE $this->tableName SET name = '$this->name', dni = '$this->dni', comercialbusiness = '$this->comercialbusiness', address = '$this->address', lastmodified = NOW() WHERE id=$this->id";
 
             /* ejecucion */
             $BD->query($query);
@@ -82,7 +82,7 @@ class Company {
     public function delete() {
         if ($this->id !== "null") {
             /* incluye la conexion a la base de datos */
-            require_once dirname(__FILE__) . '/config/config.php';
+            require_once dirname(dirname(__FILE__)) . '/config/config.php';
 
             /* query de ejecucion */
             $query = "DELETE FROM $this->tableName WHERE id = $this->id";
@@ -107,7 +107,7 @@ class Company {
      */
     public function get_all() {
         /* incluye la conexion a la base de datos */
-        require_once dirname(__FILE__) . '/config/config.php';
+        require_once dirname(dirname(__FILE__)) . '/config/config.php';
 
         /* query de ejecucion */
         $query = "SELECT * FROM $this->tableName";
@@ -139,7 +139,7 @@ class Company {
     public function get_by_id() {
         if ($this->id !== "null") {
             /* incluye la conexion a la base de datos */
-            require_once dirname(__FILE__) . '/config/config.php';
+            require_once dirname(dirname(__FILE__)) . '/config/config.php';
 
             /* query de ejecucion */
             $query = "SELECT * FROM $this->tableName WHERE id = $this->id";
