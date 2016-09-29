@@ -12,7 +12,7 @@ class User {
      * @property int $phone telefono del usuario
      * @property string $tableName nombre de la tabla en la base de datos 
      */
-    protected $tablename = "user", $id,$email,$phone;
+    protected $tablename = "user", $id, $dni, $email,$phone;
 
     public function __construct($id = null, $dni = null, $name = null, $secondname = null, $lastname = null, $secondlastname = null, $birthdate = null, $email = null, $phone = null, $extra = null, $secondextra = null) {
     	/* setea los atributos a null cuando la clase es instanciada */
@@ -35,7 +35,7 @@ class User {
     public function insert(){
     	if($this->name !== null && $this->lastname !== null && $this->email !== null && $this->dni !== null ){
     		/* incluye la conexion a la base de datos */
-    		require_once dirname(__FILE__) . '/config/config.php';
+    		require_once dirname(dirname(__FILE__)) . '/config/config.php';
     		require_once dirname(__FILE__) . '/class_password.php';
     		
     		if($this->get_by_dni() == false){
@@ -79,7 +79,7 @@ class User {
     	if ($this->id !== "null") {
 	    	
 	    	/* incluye la conexion a la base de datos */
-	    	require_once dirname(__FILE__) . '/config/config.php';
+	    	require_once dirname(dirname(__FILE__)) . '/config/config.php';
 	    	
 	    	/* query de ejecucion */
 	    	$query = "UPDATE $this->tablename SET 
@@ -115,7 +115,7 @@ class User {
     public function delete(){
     	if($this->id !== null){
 	    	/* incluye la conexion a la base de datos */
-	    	require_once dirname(__FILE__) . '/config/config.php';
+	    	require_once dirname(dirname(__FILE__)) . '/config/config.php';
 	    	
 	    	/* query de ejecucion */
     		$query = "DELETE FROM $this->tablename WHERE id = $this->id";
@@ -142,7 +142,7 @@ class User {
     public function get_by_id(){
     	if($this->id !== null){
     		/* incluye la conexion a la base de datos */
-	    	require_once dirname(__FILE__) . '/config/config.php';
+	    	require_once dirname(dirname(__FILE__)) . '/config/config.php';
 	    	
 	    	/* query de ejecucion */
 	    	$query = "SELECT * 
@@ -176,7 +176,7 @@ class User {
     	/**
     	 * @return boolean borra en la base de datos
     	 */
-    	require_once dirname(__FILE__) . '/config/config.php';
+    	require_once dirname(dirname(__FILE__)) . '/config/config.php';
     	/**
     	 * @var string query de ejecuci�n
     	 */
@@ -199,7 +199,7 @@ class User {
     public function get_by_dni(){
     	if($this->dni !== null){
     		/* incluye la conexion a la base de datos */
-    		require_once dirname(__FILE__) . '/config/config.php';
+    		require_once dirname(dirname(__FILE__)) . '/config/config.php';
     		
     		/* query de ejecucion */
     		$query = "SELECT *
