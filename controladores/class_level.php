@@ -1,29 +1,26 @@
 <?php
 
 /**
- * Archivo de definicion de la clase feedback.
+ * Archivo de definicion de la clase level.
  * Las clases se definen con Mayuscula para diferenciarlas de los metodos
  */
-class Feedback {
+class Level {
 
     /**
-     * @property int $id id del feedback
-     * @property int $user_id id del usuario al que pertenece
+     * @property int $id id del level
      * @property string $tableName nombre de la tabla en la base de datos 
      */
-    protected $id, $user_id, $tableName = "feedback";
+    protected $id, $tableName = "level";
 
-    public function __construct($id = "null", $user_id = "null", $title = "null", $comment = "null") {
+    public function __construct($id = "null", $name = "null", $function = "null") {
         //setea los atributos a null cuando la clase es instanciada
         $this->id = $id;
-        $this->user_id = $user_id;
-        $this->title = $title;
-        $this->comment = $comment;
-        $this->status = true;
+        $this->name = $name;
+        $this->function = $function;
     }
 
     /**
-     * @return boolean inserta un nuevo feedback
+     * @return boolean inserta un nuevo level
      */
     public function insert() {
         if ($this->user_id !== "null" && $this->title !== "null") {
@@ -31,7 +28,7 @@ class Feedback {
             require_once dirname(dirname(__FILE__)) . '/config/config.php';
 
             /* query de ejecucion */
-            $query = "INSERT INTO $this->tableName VALUES (null, $this->user_id, '$this->title', '$this->comment', NOW(), $this->status)";
+            $query = "INSERT INTO $this->tableName VALUES (null, '$this->name', '$this->function')";
 
             /* ejecucion */
             $BD->query($query);
@@ -42,14 +39,14 @@ class Feedback {
             } else {
                 return false;
             }
+            $BD->close();
         } else {
             return false;
         }
-        $BD->close();
     }
 
     /**
-     * @return boolean actualiza los datos del feedback
+     * @return boolean actualiza los datos del level
      */
     public function update() {
         if ($this->id !== "null") {
@@ -57,7 +54,7 @@ class Feedback {
             require_once dirname(dirname(__FILE__)) . '/config/config.php';
 
             /* query de ejecucion */
-            $query = "UPDATE $this->tableName SET user_id = $this->user_id, title = '$this->title', comment = '$this->comment', status = $this->status WHERE id=$this->id";
+            $query = "UPDATE $this->tableName SET title = '$this->name', function = '$this->function' WHERE id=$this->id";
 
             /* ejecucion */
             $BD->query($query);
@@ -68,10 +65,10 @@ class Feedback {
             } else {
                 return false;
             }
+            $BD->close();
         } else {
             return false;
         }
-        $BD->close();
     }
 
     /**
@@ -94,10 +91,10 @@ class Feedback {
             } else {
                 return false;
             }
+            $BD->close();
         } else {
             return false;
         }
-        $BD->close();
     }
 
     /**
@@ -131,7 +128,7 @@ class Feedback {
     }
 
     /**
-     * @return array Obtiene los datos desde la bbdd del feedback instanciado (debe tener id) 
+     * @return array Obtiene los datos desde la bbdd del level instanciado (debe tener id) 
      * y devuelve un objeto para utilizar en cualquier situación
      */
     public function get_by_id() {
@@ -166,7 +163,7 @@ class Feedback {
 
 }
 
-//$feedback = new Feedback(3, 1, null, null);
-//print_r($feedback);
+//$level = new Level(3, 1, null, null);
+//print_r($level);
 //echo '<br>';
-//var_dump($feedback->get_all());
+//var_dump($level->get_all());
