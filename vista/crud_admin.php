@@ -56,26 +56,26 @@ $page_title = "CRUD Admin";
                     <li>
                         <div class="collapsible-header"><i class="material-icons">group_work</i>Empresas</div>
                         <div class="collapsible-body">
-                            <a class="btn blue waves-effect waves-light block-btn" id="company">Company</a>
-                            <a class="btn blue waves-effect waves-light block-btn" id="center">Center</a>
+                            <a class="btn blue waves-effect waves-light block-btn crud-item" id="company">Company</a>
+                            <a class="btn blue waves-effect waves-light block-btn crud-item" id="center">Center</a>
                         </div>
                     </li>
                     <li>
                         <div class="collapsible-header"><i class="material-icons">contacts</i>Usuarios</div>
                         <div class="collapsible-body">
-                            <a class="btn waves-effect waves-light block-btn" id="feedback">Feedback</a>
+                            <a class="btn waves-effect waves-light block-btn crud-item" id="feedback">Feedback</a>
                         </div>
                     </li>
                     <li>
                         <div class="collapsible-header"><i class="material-icons">picture_in_picture</i>Eventos</div>
                         <div class="collapsible-body">
-                            <a class="btn green darken-4 waves-effect waves-light block-btn" id="resource">Resource</a>
+                            <a class="btn green darken-4 waves-effect waves-light block-btn crud-item" id="resource">Resource</a>
                         </div>
                     </li>
                     <li>
                         <div class="collapsible-header"><i class="material-icons">settings</i>Settings</div>
                         <div class="collapsible-body">
-                            <a class="btn orange darken-4 waves-effect waves-light block-btn" id="level">Level</a>
+                            <a class="btn orange darken-4 waves-effect waves-light block-btn crud-item" id="level">Level</a>
                         </div>
                     </li>
                 </ul>
@@ -93,7 +93,7 @@ $page_title = "CRUD Admin";
                 accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
             });
 
-            $('#center, #company').click(function () {
+            $('.crud-item').click(function () {
                 url = "../logica/crud_" + $(this).attr('id') + ".php";
                 $('.progress').children('div').toggleClass('determinate').toggleClass('indeterminate');
                 $('#content').load(url, function () {
