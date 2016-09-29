@@ -58,6 +58,7 @@ $page_title = "CRUD Admin";
                         <div class="collapsible-body">
                             <a class="btn blue waves-effect waves-light block-btn crud-item" id="company">Company</a>
                             <a class="btn blue waves-effect waves-light block-btn crud-item" id="center">Center</a>
+                            <a class="btn blue waves-effect waves-light block-btn crud-item" id="centerresource">Center Resource</a>
                         </div>
                     </li>
                     <li>
@@ -76,6 +77,10 @@ $page_title = "CRUD Admin";
                         <div class="collapsible-header"><i class="material-icons">settings</i>Settings</div>
                         <div class="collapsible-body">
                             <a class="btn orange darken-4 waves-effect waves-light block-btn crud-item" id="level">Level</a>
+                            <a class="btn orange darken-4 waves-effect waves-light block-btn crud-item" id="userlevel">User Level</a>
+                            <a class="btn orange darken-4 waves-effect waves-light block-btn crud-item" id="capability">Capability</a>
+                            <a class="btn orange darken-4 waves-effect waves-light block-btn crud-item" id="rolecapability">Role Capability</a>
+                            <a class="btn orange darken-4 waves-effect waves-light block-btn crud-item" id="role">Role</a>
                         </div>
                     </li>
                 </ul>
