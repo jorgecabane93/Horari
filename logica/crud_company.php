@@ -33,7 +33,7 @@ if ($companys) {
         echo "</tr>";
     }
 } else {
-    echo "<tr><td colspan=6 class='orange white-text'>No hay datos de la tabla en la base de datos</td></tr>";
+    echo "<tr><td colspan=9 class='orange white-text'>No hay datos de la tabla en la base de datos</td></tr>";
 }
 echo "</table>";
 ?>
