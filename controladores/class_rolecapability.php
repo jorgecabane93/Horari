@@ -4,7 +4,7 @@
  * Archivo de definicion de la clase rolecapability.
  * Las clases se definen con Mayuscula para diferenciarlas de los metodos
  */
-class Roleca_pability {
+class Role_capability {
 
 	/**
 	 * @property int $id id del centro
