@@ -1,6 +1,6 @@
 <?php
 
-/* solicitud de la clase */
+/* solicitud de la clase userlevel */
 require_once dirname(dirname(__FILE__)) . '/controladores/class_userlevel.php';
 
 $obj = new User_level();
